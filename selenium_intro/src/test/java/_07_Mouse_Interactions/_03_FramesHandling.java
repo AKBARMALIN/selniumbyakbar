@@ -1,4 +1,4 @@
-package _02_mouse_interactions;
+package _07_Mouse_Interactions;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +12,7 @@ import java.time.Duration;
  * Demonstrates frame handling and drag-and-drop operations using Selenium WebDriver.
  * @author Akbar Shaik
  */
-public class _02_FramesHandling {
+public class _03_FramesHandling {
 
     public static void main(String[] args) {
         // Initialize ChromeDriver instance
