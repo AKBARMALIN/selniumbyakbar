@@ -12,7 +12,7 @@ import java.time.Duration;
  * Demonstrates frame handling and drag-and-drop operations using Selenium WebDriver.
  * @author Akbar Shaik
  */
-public class _03_FramesHandling {
+public class _05_FramesHandling {
 
     public static void main(String[] args) {
         // Initialize ChromeDriver instance

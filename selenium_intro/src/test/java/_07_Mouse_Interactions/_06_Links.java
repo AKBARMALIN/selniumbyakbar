@@ -16,7 +16,7 @@ import java.util.Set;
  * It navigates to a practice page, counts and lists all links, counts links in the footer,
  * counts links in the first column of the footer, opens each link in a new tab, and prints the titles of each opened page.
  */
-public class _04_Links {
+public class _06_Links {
 
     public static void main(String[] args) {
 
