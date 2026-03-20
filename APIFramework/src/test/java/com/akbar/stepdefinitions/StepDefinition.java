@@ -2,6 +2,9 @@ package com.akbar.stepdefinitions;
 
 import com.akbar.pojo.AddPlace;
 import com.akbar.pojo.Location;
+import com.akbar.resources.TestDataBuilder;
+import com.akbar.resources.Utils;
+import com.fasterxml.jackson.core.json.UTF8DataInputJsonParser;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -18,35 +21,16 @@ import java.util.Arrays;
 
 import static io.restassured.RestAssured.given;
 
-public class StepDefinition {
+public class StepDefinition extends Utils {
 
     ResponseSpecification res;
     RequestSpecification resSpec;
     Response response;
+    TestDataBuilder data;
 
     @Given("Add place payload")
     public void add_place_payload() {
-        RestAssured.baseURI = "http://216.10.245.166";
 
-        Location location = new Location();
-        location.setLat(-38.383494);
-        location.setLng(33.427362);
-
-        AddPlace addPlace = new AddPlace();
-        addPlace.setAccuracy(50);
-        addPlace.setAddress("29, side layout, cohen 09");
-        addPlace.setLanguage("French-IN");
-        addPlace.setName("Frontline house");
-        addPlace.setPhone_number("(+91) 983 893 3937");
-        addPlace.setWebsite("http://google.com");
-        addPlace.setTypes(Arrays.asList("shoe park", "shop"));
-        addPlace.setLocation(location);
-
-        RequestSpecification req = new RequestSpecBuilder()
-                .setBaseUri("http://216.10.245.166")
-                .addQueryParam("key", "qaclick123")
-                .setContentType(ContentType.JSON)
-                .build();
 
         res = new ResponseSpecBuilder()
                 .expectStatusCode(200)
@@ -54,7 +38,7 @@ public class StepDefinition {
                 .build();
 
 
-        resSpec = given().spec(req).body(addPlace);
+        resSpec = given().spec(requestSpecification()).body(data.addPlacePayload());
     }
 
     @When("user calls {string} with POST http request")
