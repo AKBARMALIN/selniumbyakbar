@@ -1,15 +1,10 @@
 package com.akbar.stepdefinitions;
 
-import com.akbar.pojo.AddPlace;
-import com.akbar.pojo.Location;
 import com.akbar.resources.TestDataBuilder;
 import com.akbar.resources.Utils;
-import com.fasterxml.jackson.core.json.UTF8DataInputJsonParser;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.RestAssured;
-import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -17,7 +12,7 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.junit.Assert;
 
-import java.util.Arrays;
+import java.io.FileNotFoundException;
 
 import static io.restassured.RestAssured.given;
 
@@ -28,14 +23,14 @@ public class StepDefinition extends Utils {
     Response response;
     TestDataBuilder data;
 
+    public StepDefinition() {
+        data = new TestDataBuilder();
+    }
+
     @Given("Add place payload")
-    public void add_place_payload() {
+    public void add_place_payload() throws FileNotFoundException {
 
 
-        res = new ResponseSpecBuilder()
-                .expectStatusCode(200)
-                .expectContentType(ContentType.JSON)
-                .build();
 
 
         resSpec = given().spec(requestSpecification()).body(data.addPlacePayload());
@@ -43,6 +38,11 @@ public class StepDefinition extends Utils {
 
     @When("user calls {string} with POST http request")
     public void user_calls_with_post_http_request(String string) {
+        res = new ResponseSpecBuilder()
+                .expectStatusCode(200)
+                .expectContentType(ContentType.JSON)
+                .build();
+
         response = resSpec.when().post("/maps/api/place/add/json")
                 .then().spec(res)
                 .extract().response();
