@@ -27,13 +27,9 @@ public class StepDefinition extends Utils {
         data = new TestDataBuilder();
     }
 
-    @Given("Add place payload")
-    public void add_place_payload() throws FileNotFoundException {
-
-
-
-
-        resSpec = given().spec(requestSpecification()).body(data.addPlacePayload());
+    @Given("Add place payload with {string} {string} {string}")
+    public void add_place_payload_with(String name, String language, String address) throws FileNotFoundException {
+        resSpec = given().spec(requestSpecification()).body(data.addPlacePayload(name, language, address));
     }
 
     @When("user calls {string} with POST http request")
